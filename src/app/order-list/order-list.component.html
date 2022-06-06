@@ -1,0 +1,62 @@
+<div class="container-fluid mt-2 p-5">
+    <div class="mt-3" *ngIf="!loading else loadingTemplate">
+        <div class="clearfix mb-3">
+            <button id="editOrder" type="button" class="btn btn-secondary float-end"
+                (click)="showOrderEditModal()">Düzenle
+            </button>
+        </div>
+        <div class="col-lg-12">
+            <table class="table table-light table-responsive table-bordered table-hover">
+                <thead class="table-secondary">
+                    <tr>
+                        <th class="col text-center" scope="col">#</th>
+                        <th scope="col">Müşteri Sipariş No</th>
+                        <th scope="col">Çıkış Adresi</th>
+                        <th scope="col">Varış Adresi</th>
+                        <th scope="col">Miktar</th>
+                        <th scope="col">Miktar Birim</th>
+                        <th scope="col">Ağırlık</th>
+                        <th scope="col">Ağırlık Birim</th>
+                        <th scope="col">Malzeme Adı</th>
+                        <th scope="col">Statü</th>
+                        <th scope="col">Not</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="align-middle" *ngFor="let order of Orders">
+                        <td scope="row">
+                            <div class="form-check" style="margin-top: 10px">
+                                <input class="form-check-input m-0" type="radio"
+                                    id="radioButton_{{order.customerOrderNo}}" name="radioButton"
+                                    value="{{ order.customerOrderNo }}" (change)="setCustomerOrderNo($event)" />
+                            </div>
+                        </td>
+                        <td>{{ order.customerOrderNo }}</td>
+                        <td>{{ order.outputAddress }}</td>
+                        <td>{{ order.destinationAddress}}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td>{{ order.quantityUnit }}</td>
+                        <td>{{ order.weight }}</td>
+                        <td>{{ order.weightUnit }}</td>
+                        <td>{{ order.itemName}}</td>
+                        <td>{{ order.status }}</td>
+                        <td>{{ order.note }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingTemplate>
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>
+
+<app-order-edit [selectedCustomerOrderNo]="selectedCustomerOrderNo" [selectedOrderStatus]="selectedOrderStatus"
+    (updateStatus)="updateStatusInOrders($event.customerOrderNo, $event.status)"
+    (loading)="changeLoading($event)">
+</app-order-edit>
