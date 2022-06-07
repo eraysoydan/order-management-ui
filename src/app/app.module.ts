@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DataTablesModule } from 'angular-datatables';
 
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderEditComponent } from './order-edit/order-edit.component';
@@ -18,6 +19,7 @@ import { OrderEditComponent } from './order-edit/order-edit.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,

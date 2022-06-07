@@ -15,11 +15,19 @@ export class OrderListComponent implements OnInit {
   selectedCustomerOrderNo: string = "";
   selectedOrderStatus: string = "";
   loading: boolean = false;
+  dtOptions: DataTables.Settings = {};
 
   constructor(public orderService: OrderService) { }
 
   ngOnInit(): void {
     this.loadOrders();
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      processing: true,
+      language: { url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json' }
+    };
   }
 
   loadOrders() {
